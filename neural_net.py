@@ -79,9 +79,9 @@ class TwoLayerNet(object):
         # shape (N, C).                                                             #
         #############################################################################
         # *****START OF YOUR CODE*****
-
-        pass
-
+        # Forward pass: compute scores
+        hidden_layer = np.maximum(0, X.dot(W1) + b1)  # ReLU activation
+        scores = hidden_layer.dot(W2) + b2
         # *****END OF YOUR CODE*****
 
         # If the targets are not given then jump out, we're done
@@ -97,9 +97,13 @@ class TwoLayerNet(object):
         # classifier loss.                                                          #
         #############################################################################
         # *****START OF YOUR CODE*****
-
-        pass
-
+        # Compute the loss
+        shift_scores = scores - np.max(scores, axis=1, keepdims=True)
+        softmax_output = np.exp(shift_scores) / np.sum(np.exp(shift_scores), axis=1, keepdims=True)
+        correct_log_probs = -np.log(softmax_output[np.arange(N), y])
+        data_loss = np.sum(correct_log_probs) / N
+        reg_loss = 0.5 * reg * (np.sum(W1 * W1) + np.sum(W2 * W2))
+        loss = data_loss + reg_loss
         # *****END OF YOUR CODE*****
 
         # Backward pass: compute gradients
@@ -110,9 +114,22 @@ class TwoLayerNet(object):
         # grads['W1'] should store the gradient on W1, and be a matrix of same size #
         #############################################################################
         # *****START OF YOUR CODE*****
+        # Compute gradients
+        dscores = softmax_output
+        dscores[np.arange(N), y] -= 1
+        dscores /= N
 
-        pass
+        grads['W2'] = np.dot(hidden_layer.T, dscores)
+        grads['b2'] = np.sum(dscores, axis=0)
 
+        dhidden = np.dot(dscores, W2.T)
+        dhidden[hidden_layer <= 0] = 0
+
+        grads['W1'] = np.dot(X.T, dhidden)
+        grads['b1'] = np.sum(dhidden, axis=0)
+
+        grads['W2'] += reg * W2
+        grads['W1'] += reg * W1
         # *****END OF YOUR CODE*****
 
         return loss, grads
