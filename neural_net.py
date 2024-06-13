@@ -173,7 +173,10 @@ class TwoLayerNet(object):
             #########################################################################
             # *****START OF YOUR CODE*****
 
-            pass
+            # Create a random minibatch of training data and labels
+            batch_indices = np.random.choice(num_train, batch_size)
+            X_batch = X[batch_indices]
+            y_batch = y[batch_indices]
 
             # *****END OF YOUR CODE*****
 
@@ -189,7 +192,9 @@ class TwoLayerNet(object):
             #########################################################################
             # *****START OF YOUR CODE*****
 
-            pass
+            # Update the parameters using SGD
+            for param in self.params:
+                self.params[param] -= learning_rate * grads[param]
 
             # *****END OF YOUR CODE*****
 
