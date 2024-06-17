@@ -15,7 +15,7 @@ def load_data_folder():
     if not os.path.exists(download_dir):
         print("download again")
         download.maybe_download_and_extract(url,download_dir)
-    cifar10_dir = 'data\CIFAR-10\cifar-10-batches-py' 
+    cifar10_dir = 'data/CIFAR-10/cifar-10-batches-py' 
     return cifar10_dir
 
 
@@ -29,16 +29,13 @@ def train_test_process(X_train,X_test,y_train,y_test):
 
     # Our validation set will be num_validation points from the original
     # training set.
-    mask = range(num_training, num_training + num_validation)
-    print(len(y_train))
-    X_val = X_train[mask]
-    y_val = y_train[mask]
+    X_val = X_train[num_training:num_training + num_validation]
+    y_val = y_train[num_training:num_training + num_validation]
 
     # Our training set will be the first num_train points from the original
     # training set.
-    mask = range(num_training)
-    X_train = X_train[mask]
-    y_train = y_train[mask]
+    X_train = X_train[:num_training]
+    y_train = y_train[:num_training]
 
     # We will also make a development set, which is a small subset of
     # the training set.
@@ -48,9 +45,8 @@ def train_test_process(X_train,X_test,y_train,y_test):
 
     # We use the first num_test points of the original test set as our
     # test set.
-    mask = range(num_test)
-    X_test = X_test[mask]
-    y_test = y_test[mask]
+    X_test = X_test[:num_test]
+    y_test = y_test[:num_test]
 
     print('Train data shape: ', X_train.shape)
     print('Train labels shape: ', y_train.shape)
@@ -130,3 +126,5 @@ def train_test_process(X_train,X_test,y_train,y_test):
 
 
 
+
+# %%
