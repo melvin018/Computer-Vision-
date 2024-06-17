@@ -83,7 +83,7 @@ def train_test_process(X_train,y_train,X_test,y_test):
     X_dev = np.hstack([X_dev, np.ones((X_dev.shape[0], 1))])
 
     print(X_train.shape, X_val.shape, X_test.shape, X_dev.shape)
-
+    return X_dev,y_dev,X_val,y_val
 
 
 
