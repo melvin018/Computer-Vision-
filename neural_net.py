@@ -73,11 +73,8 @@ class TwoLayerNet(object):
 
         # Compute the forward pass
         scores = None
-        #############################################################################
-        # TODO: Perform the forward pass, computing the class scores for the input. #
-        # Store the result in the scores variable, which should be an array of      #
-        # shape (N, C).                                                             #
-        #############################################################################
+
+
         # *****START OF YOUR CODE*****
         # Forward pass: compute scores
         hidden_layer = np.maximum(0, X.dot(W1) + b1)  # ReLU activation
@@ -90,12 +87,9 @@ class TwoLayerNet(object):
 
         # Compute the loss
         loss = None
-        #############################################################################
-        # TODO: Finish the forward pass, and compute the loss. This should include  #
-        # both the data loss and L2 regularization for W1 and W2. Store the result  #
-        # in the variable loss, which should be a scalar. Use the Softmax           #
-        # classifier loss.                                                          #
-        #############################################################################
+
+
+
         # *****START OF YOUR CODE*****
         # Compute the loss
         shift_scores = scores - np.max(scores, axis=1, keepdims=True)
@@ -108,11 +102,9 @@ class TwoLayerNet(object):
 
         # Backward pass: compute gradients
         grads = {}
-        #############################################################################
-        # TODO: Compute the backward pass, computing the derivatives of the weights #
-        # and biases. Store the results in the grads dictionary. For example,       #
-        # grads['W1'] should store the gradient on W1, and be a matrix of same size #
-        #############################################################################
+
+
+
         # *****START OF YOUR CODE*****
         # Compute gradients
         dscores = softmax_output
@@ -240,7 +232,9 @@ class TwoLayerNet(object):
         ###########################################################################
         # *****START OF YOUR CODE*****
 
-        pass
+        hidden_layer = np.maximum(0, X.dot(self.params['W1']) + self.params['b1'])
+        scores = hidden_layer.dot(self.params['W2']) + self.params['b2']
+        y_pred = np.argmax(scores, axis=1)
 
         # *****END OF YOUR CODE*****
 

@@ -94,5 +94,7 @@ def maybe_download_and_extract(url, download_dir):
     else:
         print("Data has apparently already been downloaded and unpacked.")
 
-
+url = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
+download_dir = "data/CIFAR-10/"
+maybe_download_and_extract(url, download_dir)
 ########################################################################
