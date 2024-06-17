@@ -5,68 +5,30 @@ import matplotlib.pyplot as plt
 import data_utils
 import download
 
-import os
 
 
 def load_data_folder():
-    '''Function added to load the data'''
     url = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
     download_dir = "./data"
-    if not os.path.exists(download_dir):
-        print("download again")
-        download.maybe_download_and_extract(url,download_dir)
-    cifar10_dir = 'data/CIFAR-10/cifar-10-batches-py' 
-    return cifar10_dir
+    download.maybe_download_and_extract(url,download_dir)
+    cifar10_dir = './data/cifar-10-batches-py'
 
 
-def train_test_process(X_train,X_test,y_train,y_test):
+def train_test_process(X,y):
     # Set the number of samples for each set
     num_training = 49000
     num_validation = 1000
     num_test = 1000
     num_dev = 500
-    print(len(y_train))
 
-    # Our validation set will be num_validation points from the original
-    # training set.
-    X_val = X_train[num_training:num_training + num_validation]
-    y_val = y_train[num_training:num_training + num_validation]
-
-    # Our training set will be the first num_train points from the original
-    # training set.
-    X_train = X_train[:num_training]
-    y_train = y_train[:num_training]
-
-    # We will also make a development set, which is a small subset of
-    # the training set.
-    mask = np.random.choice(num_training, num_dev, replace=False)
-    X_dev = X_train[mask]
-    y_dev = y_train[mask]
-
-    # We use the first num_test points of the original test set as our
-    # test set.
-    X_test = X_test[:num_test]
-    y_test = y_test[:num_test]
-
-    print('Train data shape: ', X_train.shape)
-    print('Train labels shape: ', y_train.shape)
-    print('Validation data shape: ', X_val.shape)
-    print('Validation labels shape: ', y_val.shape)
-    print('Test data shape: ', X_test.shape)
-    print('Test labels shape: ', y_test.shape)
-
-
-
-    '''
-    
     # Our validation set will be num_validation points from the original training set.
     X_val = X_train[num_training:num_training + num_validation]
     y_val = y_train[num_training:num_training + num_validation]
-  
+
     # Our training set will be the first num_train points from the original training set.
     X_train = X_train[:num_training]
     y_train = y_train[:num_training]
-    
+
     # We will also make a development set, which is a small subset of the training set.
     mask = np.random.choice(num_training, num_dev, replace=False)
     X_dev = X_train[mask]
@@ -121,10 +83,7 @@ def train_test_process(X_train,X_test,y_train,y_test):
     X_dev = np.hstack([X_dev, np.ones((X_dev.shape[0], 1))])
 
     print(X_train.shape, X_val.shape, X_test.shape, X_dev.shape)
-    '''
 
 
 
 
-
-# %%
