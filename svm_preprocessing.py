@@ -14,7 +14,7 @@ def load_data_folder():
     cifar10_dir = './data/cifar-10-batches-py'
 
 
-def train_test_process(X,y):
+def train_test_process(X_train,y_train,X_test,y_test):
     # Set the number of samples for each set
     num_training = 49000
     num_validation = 1000
