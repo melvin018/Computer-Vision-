@@ -28,7 +28,8 @@ For this assignment, you will be working on a series of Jupyter Notebooks to imp
 ### Submission Guidelines:
 - Ensure that each notebook (and python script) is fully completed and all cells are executed without errors.
 - Save each completed notebook with all outputs visible.
-- Push the completed notebooks to the GitHub repo.
+- Convert each `.ipynb` file to a `.py` format for ease of use.
+- Push the completed notebooks and the corresponding `.py` files to the GitHub repo.
 - Your GitHub repo should be private.
 
 ### Important Notes:
@@ -42,7 +43,7 @@ For this assignment, you will be working on a series of Jupyter Notebooks to imp
 - `two_layer_net.ipynb`: Completed by Sarath, Parmeet, Anjali
 
 ### Confirmation:
-All group members have completed their parts and the assignment is complete. The completed notebooks have been pushed to the private GitHub repository.
+All group members have completed their parts and the assignment is complete. The completed notebooks and the corresponding `.py` files have been pushed to the private GitHub repository.
 
 ---
 **Ankit, Jasdeep, Cristeena, Dhvani, Ashtami, Sarath, Parmeet, Anjali, Melvin, Ajit**
