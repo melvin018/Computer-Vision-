@@ -2,7 +2,7 @@
 
 ## Assignment 1: Computer Vision
 
-**Deadline:** Week 7, June 13, 23:59
+**Deadline:** Week 7, June 17, 23:59
 
 **Group Members:**
 - Ankit
