@@ -44,8 +44,7 @@ def get_CIFAR10_data(num_training=49000, num_validation=1000, num_test=1000, num
         X_dev = np.reshape(X_dev, (X_dev.shape[0], -1))
     
     # Normalize the data
-    mean_image = np.mean(X_train, axis=0)
-    mean_image = np.reshape(mean_image, (1, 32, 32, 3))  # Reshape mean image
+    mean_image = np.mean(X_train, axis=0, keepdims=True)
     X_train -= mean_image
     X_val -= mean_image  # Subtract mean image from validation data
     X_test -= mean_image
@@ -118,6 +117,16 @@ def softmax_loss_vectorized(W, X, y, reg):
 
     return loss, dW
 
+# Predict function
+def predict(X, W):
+    scores = X.dot(W)
+    predicted_labels = np.argmax(scores, axis=1)
+    return predicted_labels
+
+# Calculate accuracy
+def calculate_accuracy(y_true, y_pred):
+    return np.mean(y_true == y_pred)
+
 # Load CIFAR-10 data
 X_train, y_train, X_val, y_val, X_test, y_test, X_dev, y_dev = get_CIFAR10_data()
 
@@ -126,11 +135,20 @@ W = np.random.randn(3073, 10) * 0.0001
 loss, _ = softmax_loss_naive(W, X_dev, y_dev, 0.0)
 print('Naive loss:', loss)
 
+# Calculate accuracy for naive implementation
+y_dev_pred = predict(X_dev, W)
+accuracy = calculate_accuracy(y_dev, y_dev_pred)
+print('Naive accuracy:', accuracy)
+
 # Implement a vectorized version of the softmax loss function
 loss, _ = softmax_loss_vectorized(W, X_dev, y_dev, 0.0)
 print('Vectorized loss:', loss)
 
+# Calculate accuracy for vectorized implementation
+y_dev_pred = predict(X_dev, W)
+accuracy = calculate_accuracy(y_dev, y_dev_pred)
+print('Vectorized accuracy:', accuracy)
+
 # Check the gradient numerically
 f = lambda w: softmax_loss_naive(w, X_dev, y_dev, 0.0)[0]
 grad_numerical = grad_check_sparse(f, W, _)
-
