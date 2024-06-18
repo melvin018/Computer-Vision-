@@ -10,12 +10,12 @@ cifar10_dir = './data/cifar-10-batches-py'
 X_train, y_train, X_test, y_test = data_utils.load_CIFAR10(cifar10_dir)
 
 # Subsample the data to use only 500 training examples and 250 test examples
-num_training = 500
+num_training = 49990
 mask = list(range(num_training))
 X_train = X_train[mask]
 y_train = y_train[mask]
 
-num_test = 250
+num_test = 9999
 mask = list(range(num_test))
 X_test = X_test[mask]
 y_test = y_test[mask]
